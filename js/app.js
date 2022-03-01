@@ -1,7 +1,6 @@
 const allPhones = () => {
     const searchField = document.getElementById('search-box');
     const searchText = searchField.value;
-    // console.log(searchText)
     // phone search api
     searchField.value = '';
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -11,12 +10,10 @@ const allPhones = () => {
 }
 // phones search
 const phonesSearch = phones => {
-    // console.log(phones.slice(0, 20))
     const phoneResults = document.getElementById('phone-results');
     // clear phone result
     phoneResults.textContent = '';
     for (const phone of phones) {
-        // console.log(phone)
         const div = document.createElement('div')
         div.innerHTML = `
         <div class="card w-75 my-3 p-5">
@@ -31,7 +28,6 @@ const phonesSearch = phones => {
 }
 // Phone details 
 const showDetails = id => {
-    // console.log(id)
     // phone detail api
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     fetch(url)
