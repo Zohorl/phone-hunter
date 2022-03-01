@@ -1,23 +1,20 @@
 const allPhones = () => {
     const searchField = document.getElementById('search-box');
     const searchText = searchField.value;
-    // phone search api
+    // error handle
     if (searchText === '') {
         document.getElementById('error1').style.display = 'block';
     }
     else {
         document.getElementById('error1').style.display = 'none';
+        // clear search input
         searchField.value = '';
+        // phone search api
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
         fetch(url)
             .then(Response => Response.json())
             .then(data => phonesSearch(data.data.slice(0, 20)))
     }
-    // searchField.value = '';
-    // const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-    // fetch(url)
-    //     .then(Response => Response.json())
-    //     .then(data => phonesSearch(data.data.slice(0, 20)))
 }
 // phones search
 const phonesSearch = phones => {
