@@ -2,11 +2,22 @@ const allPhones = () => {
     const searchField = document.getElementById('search-box');
     const searchText = searchField.value;
     // phone search api
-    searchField.value = '';
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-    fetch(url)
-        .then(Response => Response.json())
-        .then(data => phonesSearch(data.data.slice(0, 20)))
+    if (searchText === '') {
+        document.getElementById('error1').style.display = 'block';
+    }
+    else {
+        document.getElementById('error1').style.display = 'none';
+        searchField.value = '';
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+        fetch(url)
+            .then(Response => Response.json())
+            .then(data => phonesSearch(data.data.slice(0, 20)))
+    }
+    // searchField.value = '';
+    // const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+    // fetch(url)
+    //     .then(Response => Response.json())
+    //     .then(data => phonesSearch(data.data.slice(0, 20)))
 }
 // phones search
 const phonesSearch = phones => {
@@ -16,7 +27,7 @@ const phonesSearch = phones => {
     for (const phone of phones) {
         const div = document.createElement('div')
         div.innerHTML = `
-        <div class="card w-75 my-3 p-5">
+        <div class="card w-75 my-4 p-5">
             <img src="${phone.image}" alt="">
             <h5 class="pt-3">Brand : ${phone.brand}</h5>
             <h5>Model : ${phone.phone_name}</h5>
@@ -40,7 +51,7 @@ const showInformation = info => {
     const div = document.createElement('div');
     div.innerHTML = `
     <div class="card w-75 my-5 px-4 py-2 mx-auto shadow-lg ">
-            <img class="w-25 mx-auto" src="${info.image}" alt="">
+            <img class="w-25 mx-auto mt-3" src="${info.image}" alt="">
             <h5 class="pt-3">Brand : ${info.brand}</h5>
             <h6>Model : ${info.name}</h6>
             <h6>Slug-Id : ${info.slug}</h6>
